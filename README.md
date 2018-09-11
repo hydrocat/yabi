@@ -1,6 +1,14 @@
+# Yet Another Business Inteligence
+
+Fornece uma interface web para os dados importantes para uma instituição.
+
+- - -
+
+## TODO
+
+1. Tratar erros das conexões SQL
 
 ## Testes
-
 
 ### Banco de Dados
 cada banco é iniciado com o docker e tem os dados do [Chinook inserido](https://github.com/lerocha/chinook-database/).
@@ -13,7 +21,7 @@ então é necessario rodar o script _que vou fazer_ que inicia as imagens e inse
 4. [SqlServer](https://hub.docker.com/r/microsoft/mssql-server-linux/)
 
 
-# Notas
+# Log
 
 ## Infra estutura de teste /sep 6, 2018
 
