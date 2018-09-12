@@ -1,0 +1,6 @@
+[submodule "yabi-backend"]
+	path = yabi-backend
+	url = git@github.com:hydrocat/yabi-backend.git
+[submodule "yabi-frontend"]
+	path = yabi-frontend
+	url = git://github.com/hydrocat/yabi-frontend

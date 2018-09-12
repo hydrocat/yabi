@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  maria:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./maria:/docker-entrypoint-initdb.d/
+      
+  oracle:
+    image: alexeiled/docker-oracle-xe-11g
+    volumes:
+      - ./oracle:/etc/entrypoint-initdb.d
+    ports:
+      - "1521:1521"
+      - "9090:8080"
+      
+  postgres:
+    image: postgres
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+
+  sqlserver:
+    image: custom-mssql
+    volumes:
+      - ./sqlserver:/docker-entrypoint-initdb.d
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: rootPassword1
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
