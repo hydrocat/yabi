@@ -1,0 +1,1127 @@
+{
+	"info": {
+		"_postman_id": "06e0c6ff-3bed-445f-a760-5432f730c03f",
+		"name": "Yabi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "base",
+			"description": "",
+			"item": [
+				{
+					"name": "Home",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Permission Tree",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/permissionTrees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissionTrees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sqlQueries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/sqlQueries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sqlQueries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "yabiUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/yabiUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"yabiUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diretórios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/directories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salva diretorio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"connectionString\":\"jdbc:mariadb://localhost:3306/teste\",\n\t\"name\":\"vitorio\",\n\t\"username\":\"root\",\n\t\"password\":\"root\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/directories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salva query",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"command\":\"Select * from vitorio;\",\n\t\"name\":\"select all\",\n\t\"description\":\"A sql for testiing purposes\",\n\t\"directory\":\"http://localhost:8080/directories/7\",\n\t\"permission\":\"http://localhost:8080/permissionTrees/1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/sqlQueries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sqlQueries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Query 8",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080//runQuery/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"",
+								"runQuery",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete permission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/permission/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permission",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Initialization",
+			"description": "",
+			"item": [
+				{
+					"name": "a permission tree",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d46c9ffd-85ed-4f17-b83a-133f1859ab28",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nodePath\": \"/a\",\n    \"parent\":\"http://localhost:8080/permissionTrees/1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/permissionTrees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissionTrees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "b permission tree",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "51f01f88-4bd7-49e6-92cf-037f8e72fe4b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nodePath\": \"/b\",\n    \"parent\":\"http://localhost:8080/permissionTrees/1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/permissionTrees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissionTrees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sub b permission tree",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "49c4e38e-6fd5-47a6-90de-5aba1d3d6cf0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nodePath\": \"/b/b1\",\n    \"parent\":\"http://localhost:8080/permissionTrees/2\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/permissionTrees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissionTrees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sub a permission tree",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fd3168fa-85d2-49e4-93c1-8da01e24ab0d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"BStatus 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nodePath\": \"/a/a1\",\n    \"parent\":\"http://localhost:8080/permissionTrees/5\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/permissionTrees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"permissionTrees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salva diretorio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21d5aec7-3e49-4ebb-8717-def5b72ca8e5",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"connectionString\":\"jdbc:mariadb://localhost:3306/teste\",\n\t\"name\":\"vitorio\",\n\t\"username\":\"root\",\n\t\"password\":\"root\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/directories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salva query 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a9f96e22-ac06-4e13-a1c5-58c606103b1f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"command\":\"Select * from vitorio;\",\n\t\"name\":\"select all\",\n\t\"description\":\"A sql for testiing purposes\",\n\t\"directory\":\"http://localhost:8080/directories/6\",\n\t\"permission\":\"http://localhost:8080/permissionTrees/1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/sqlQueries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sqlQueries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user vitorio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b1e851d-63ae-4f08-9612-7a12b30b7e22",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"vitorio\",\n\t\"permission\":[\n\t\t\"http://localhost:8080/permissionTrees/1\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/yabiUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"yabiUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salva query 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9c0a6018-d534-495e-ade9-f572e480b2a6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"command\":\"Select name from vitorio;\",\n\t\"name\":\"select all names\",\n\t\"description\":\"Show all names from vitorio\",\n\t\"directory\":\"http://localhost:8080/directories/6\",\n\t\"permission\":\"http://localhost:8080/permissionTrees/2\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/sqlQueries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sqlQueries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salva query multicolumn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e41ce1f-d3be-460a-8e79-806f3a2212db",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status 201, Criou\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW5QYXNz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"command\":\"Select * from multicolumn;\",\n\t\"name\":\"Tetar colunas\",\n\t\"description\":\"Testar tabelas com varias colunas\",\n\t\"directory\":\"http://localhost:8080/directories/6\",\n\t\"permission\":\"http://localhost:8080/permissionTrees/1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/sqlQueries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sqlQueries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tests",
+			"description": "",
+			"item": [
+				{
+					"name": "Duplicated Inserts",
+					"description": "",
+					"item": [
+						{
+							"name": "Create Admin twice",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4f03c570-3a7e-49a8-9856-e31f270d3e51",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status 409, Conflict (esperado)\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"admin\",\n\t\"permission\":[\n\t\t\"http://localhost:8080/permissionTrees/1\"\n\t\t]\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/yabiUsers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"yabiUsers"
+									]
+								},
+								"description": "Try to add an already existing user. Should fail with 409 (Conflict)"
+							},
+							"response": []
+						},
+						{
+							"name": "SqlQuery - initialization",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "3dda263f-c0c0-4e6f-bf2d-164757f08110",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Ciou SqlQuery\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"command\":\"Select * from vitorio;\",\n\t\"name\":\"query-that-will-conflict\",\n\t\"description\":\"Lets conflict!\",\n\t\"directory\":\"http://localhost:8080/directories/6\",\n\t\"permission\":\"http://localhost:8080/permissionTrees/1\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/sqlQueries",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"sqlQueries"
+									]
+								},
+								"description": "Creates a initial sqlQuery that will be inserted again"
+							},
+							"response": []
+						},
+						{
+							"name": "SqlQuery - Denial",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "4bd96b7a-7374-4bfc-bf69-53db52ab6411",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Conflito ao criar SqlQuery repetida\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"command\":\"Select * from vitorio;\",\n\t\"name\":\"query-that-will-conflict\",\n\t\"description\":\"Lets conflict!\",\n\t\"directory\":\"http://localhost:8080/directories/6\",\n\t\"permission\":\"http://localhost:8080/permissionTrees/1\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/sqlQueries",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"sqlQueries"
+									]
+								},
+								"description": "Creates a initial sqlQuery that will be inserted again"
+							},
+							"response": []
+						},
+						{
+							"name": "PermissionTree - Initialization",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "882c7bd0-502a-458f-a95c-9a6195215654",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Criou\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nodePath\": \"/i-will-eventually-fail\",\n    \"parent\":\"http://localhost:8080/permissionTrees/1\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/permissionTrees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"permissionTrees"
+									]
+								},
+								"description": "There should be a conflict when create a PermissionTree with the same nodePath"
+							},
+							"response": []
+						},
+						{
+							"name": "PermissionTree - Denial",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3dec2ffc-afe4-4f02-8ec5-f7697c21ec51",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a5947c69-6a6c-4f4d-9dba-90a8a9bf53b5",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Nao deixou criar permissionTree repetido\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nodePath\": \"/i-will-eventually-fail\",\n    \"parent\":\"http://localhost:8080/permissionTrees/1\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/permissionTrees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"permissionTrees"
+									]
+								},
+								"description": "There should be a conflict when create a PermissionTree with the same nodePath"
+							},
+							"response": []
+						},
+						{
+							"name": "Directory - Init",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "38b5930b-eccb-4010-b63c-e309388cec70",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Criou\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"connectionString\":\"jdbc:mariadb://localhost:3306/teste\",\n\t\"name\":\"vitorio_conflict\",\n\t\"username\":\"root\",\n\t\"password\":\"root\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/directories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"directories"
+									]
+								},
+								"description": "Test adding conflicting directories"
+							},
+							"response": []
+						},
+						{
+							"name": "Directory - connectionString conflict",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "bcc72cfd-4b8f-4117-a8f2-c744ca3bf729",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"connectionString duplicado\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"connectionString\":\"jdbc:mariadb://localhost:3306/teste\",\n\t\"name\":\"vitorio_outro_nome\",\n\t\"username\":\"root\",\n\t\"password\":\"root\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/directories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"directories"
+									]
+								},
+								"description": "Test adding conflicting directories"
+							},
+							"response": []
+						},
+						{
+							"name": "Directory - Name Conflict",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f23a5fb2-45d0-4b63-bd38-e2ea1048f9d4",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Conflito de nome\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWRtaW46YWRtaW5QYXNz"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"connectionString\":\"jdbc:mariadb://localhost:3306/teste_ok\",\n\t\"name\":\"vitorio_conflict\",\n\t\"username\":\"root\",\n\t\"password\":\"root\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/directories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"directories"
+									]
+								},
+								"description": "Test adding conflicting directories"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
