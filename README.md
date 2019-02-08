@@ -7,6 +7,7 @@ Fornece uma interface web para os dados importantes para uma instituição.
 ## TODO
 
 1. Tratar erros das conexões SQL
+2. Remover System.out.println's do fluxo de segurança
 
 ## Testes
 
@@ -69,6 +70,36 @@ Queries do Oracle não devem ter ; no final, dá um erro de query inválida
 
 ## Terça, 11 de setembro
 
-Os testes com o s quatro bancos funcionou.
+Os testes com os quatro bancos funcionou.
 A imagem do docker "_custom-mssql_" também funcionou.
 **É necessário tratar as excepções do SQL**
+
+## Terça, 5 de fevereiro 2019
+
+Implementado autorização básica na api, sem acessar o servidor LDAP.
+
+Experimentação com o Spring Security, depois de obter conselhos e códigos de exemplo
+Retorna um YabiUser qualquer
+Imprime na tela os estágios da autenticação
+
+## Quarta, 6 de Fevereiro de 2019
+
+Implementei autenticação que traz da base de dados um YabiUser no authentication.getDetails().
+**Dá um erro de autenticação ao acessar uma página de conteúdo, como é o caso do /sqlQueries.**
+
+## Quinta, 7 de fevereiro
+
+*Adicionar o .csrf().disable() resolveu o problema de não autorização*
+
+### Há um erro que deixa o sistema inconsistente
+	o nome do usuário não é único. 
+	Na bateria de testes o usuário admin é inserido uma outra vez (já é inserido na inicialização)
+	*Thu Feb  7 23:30:42 WET 2019*
+	Para isso eu inseri @Column(unique = true) no atributro nome
+	Adicionei a mesma anotação em:
+		* PermissionTree.nodePath (já havia)
+		* SqlQuery ficou com a combinação de PermissionTree.id e SqlQuery.name unica
+			@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"permission", "name"}))
+		* Directory.name e Directory.connectionString não podem repetir
+	Criei uma coleção no postman que testa conflitos de entradas duplicadas e exportei em:
+		* ./tests/Yabi.postman_collection.jsons
