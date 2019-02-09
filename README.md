@@ -8,6 +8,10 @@ Fornece uma interface web para os dados importantes para uma instituição.
 
 1. Tratar erros das conexões SQL
 2. Remover System.out.println's do fluxo de segurança
+3. Lidar com erros no backend.
+   Adicionar algum tipo de chip no front-end
+   retornar mensagens de erro melhores ?
+4. Lidar com o .csrf().disable() no WebConfiguration no backend
 
 ## Testes
 
@@ -90,6 +94,7 @@ Implementei autenticação que traz da base de dados um YabiUser no authenticati
 ## Quinta, 7 de fevereiro
 
 *Adicionar o .csrf().disable() resolveu o problema de não autorização*
+*Nao devo considerar como resolvido. Adicionei ao TODO*
 
 ### Há um erro que deixa o sistema inconsistente
 	o nome do usuário não é único. 
@@ -103,3 +108,22 @@ Implementei autenticação que traz da base de dados um YabiUser no authenticati
 		* Directory.name e Directory.connectionString não podem repetir
 	Criei uma coleção no postman que testa conflitos de entradas duplicadas e exportei em:
 		* ./tests/Yabi.postman_collection.jsons
+
+## Sat Feb  9 22:38:29 WET 2019
+
+Alterei a aplicação angular para utilizar autenticação em todas requisições para a api.
+Utilizei um serviço *HttpInterceptor* que é *provided* na raiz da aplicação. O serviço adiciona o
+cabeçalho as requisições:
+	*Authentication: Basic ${base64(username):base64(password)}*
+
+É necessário usar um método melhor de autenticação. Preferencialmente, [jwt tokens](https://jwt.io/)
+
+A coleção do Yabi-init no postman mudou os id do diretório. Trava a aplicação
+Adicionado a lista de TODO:
+* Lidar com erros no backend.
+  Adicionar algum tipo de chip no front-end
+  retornar mensagens de erro melhores ?
+  
+Configurei o CORS no back-end para autorizar pedidos do *http://localhost/**
+
+
