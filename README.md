@@ -127,3 +127,15 @@ Adicionado a lista de TODO:
 Configurei o CORS no back-end para autorizar pedidos do *http://localhost/**
 
 
+## Mon Feb 11 18:42:54 WET 2019
+
+Parece que o Spring já usa o JSESSIONID como token. É um cookie. JWT não parece necessário.
+
+Comecei a implementar um endpoint que será usado para buscar as queries em função do usuário logado.
+
+Comecei a implementar uma validação no permissionTree:
+  * garantir que o parentNode existe
+  * garantir que o nodepath está correto
+	Talvez o nodePath pode ser calculado.
+
+
