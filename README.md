@@ -100,7 +100,7 @@ Implementei autenticação que traz da base de dados um YabiUser no authenticati
 	o nome do usuário não é único. 
 	Na bateria de testes o usuário admin é inserido uma outra vez (já é inserido na inicialização)
 	*Thu Feb  7 23:30:42 WET 2019*
-	Para isso eu inseri @Column(unique = true) no atributro nome
+	Para isso eu inseri @Column(unique = true) no atributo nome
 	Adicionei a mesma anotação em:
 		* PermissionTree.nodePath (já havia)
 		* SqlQuery ficou com a combinação de PermissionTree.id e SqlQuery.name unica
@@ -137,5 +137,61 @@ Comecei a implementar uma validação no permissionTree:
   * garantir que o parentNode existe
   * garantir que o nodepath está correto
 	Talvez o nodePath pode ser calculado.
+	
+## Tue Feb 12 21:11:41 WET 2019
+
+De acordo com o stackOverflow, a validação usando o @PreInsert não funciona no hibernate. parei por aí.
+
+Alterei o nome do atributo do PermissionTree de parentNode para parent, fica melhor no JSON.
+
+adicionei as anotações no sqlQueries para tentar manter a integridade do banco.
+@JoinColumn(name = "directory_id", nullable = false)
+@JoinColumn(name = "permission", nullable = false)
+
+## Wed Feb 13 19:26:22 WET 2019
+
+Fiz uma consultoria com o Lobo.
+
+Havia uma exceção ao serializar um objeto do tipo *PermissionTree* ele tem uma referência ciclica para o pai.
+Para contornanr isso, decidi usar *ViewModel*s que são serializaveis e retornados da api
+
+Criei um novo endpoint em */queries* que dá acesso as queries disponíveis ao usuário logado.
+Próximo passo é alterar o */runQuery/{id}* para checar se o usuário logado tem permissão de correr a query pedida.
+
+## Sun Feb 17 16:26:05 WET 2019
+
+O *LocalStorage* no angular guarda apenas valores em **String***, a guarda não estava funcionando porque eu não checava por
+'true' mas pela coerção para booleano. **String é True**
 
 
+Foi necessário configurar o Spring para enviar o cookie correto para que o angular possa usa-lo.
+Fiz isso com:
+
+> server.servlet.session.cookie.domain=localhost
+
+Não funcionou
+
+## Mon Feb 18 15:46:46 WET 2019
+
+Por enquanto vou deixar o interceptador de requisições no angular a injetar a autenticação.
+
+## Thu Feb 21 00:34:42 WET 2019
+
+No front-end:
+> Add error handling with toasts
+>
+> When user logs in, authentication is stored in localstorage and a interceptor
+> appends the Authentication header to each request going to the backend.
+>
+> Effectively, the user seems logged-in but when a request is sent to the backend
+> and it fails to authenticate, the frontend re-displays the login page.
+>
+> Updated the query.service.ts to handle the new /queries api
+>
+> New file with routes, apiEndpoin.ts
+
+No back-end:
+
+> A rota */runQuery/{:id}* agora checa se o usuário logado pode correr a query pedida.
+>
+> DatabseReader virou uma classe estática. porque ? porque não ?
